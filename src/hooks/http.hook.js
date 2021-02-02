@@ -18,8 +18,23 @@ export function useHttp() {
         }
 
         const serverData = await response.json();
-        
-        setData(serverData);
+        const filteredData = {
+            city: serverData.city.name,
+            weather: getWeatherData(serverData.list)
+        }
+        console.log(filteredData);
+        setData(filteredData);
     }
     return {load, data, error, loadingState}
+}
+
+function getWeatherData(data) {
+    const days = data.filter(date => new Date(date.dt * 1000).getHours() === 14)
+    const weatherData = days.map((day) => ({
+        day: new Date(day.dt*1000).toDateString().split(" ")[0],
+        temperature: day.main.temp.toFixed(),
+        icon: day.weather[0].icon,
+        description: day.weather[0].description
+    }));
+    return weatherData;
 }

@@ -1,9 +1,9 @@
 import Button from "./components/Button";
 import Input from "./components/Input";
+import WeatherList from "./components/WeatherList";
 import { useButton } from "./hooks/button.hook";
 import { useHttp } from "./hooks/http.hook";
 import { useInput } from "./hooks/input.hook";
-import { getIcon } from "./urls";
 
 function App() {
   const [input, setInput] = useInput();
@@ -30,10 +30,8 @@ function App() {
     <>
       <Input {...input} onKeyPress={send} />
       <Button onClick={send} />
-      <div>City: {data.name}</div>
-      <div>Temperature: {data.main.temp}&deg;C</div>
-      <div>{data.weather[0].description}</div>
-      <img src={getIcon(data.weather[0].icon)} alt={data.weather[0].description}></img>
+      <div>City: {data.city}</div>
+      <WeatherList data={data} />
 
     </>
   )
