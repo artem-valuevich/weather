@@ -6,5 +6,6 @@ export function useInput() {
       setInput(event.target.value);
     };
     
+    
     return [{ value: input, onChange }, setInput];
   }

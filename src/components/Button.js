@@ -1,5 +1,5 @@
-export default function Button({onClick}) {
+export default function Button(props) {
     return (
-        <button onClick={onClick}>Download</button>
+        <button {...props}>Download</button>
     )
 }

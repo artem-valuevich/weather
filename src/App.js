@@ -7,17 +7,17 @@ import { useInput } from "./hooks/input.hook";
 
 function App() {
   const [input, setInput] = useInput();
-  const {load, data, loadingState, error} = useHttp();
+  const { load, data, loadingState, error } = useHttp();
   const send = useButton(input, setInput, load);
 
-  if (!data) return (
+  if (loadingState) return (
     <>
-      <Input {...input} onKeyPress={send} />
-      <Button onClick={send} />
-      <div>No weather data yet</div>
+      <Input {...input} onKeyPress={send}  disabled={loadingState} />
+      <Button onClick={send} disabled={loadingState} />
+      <div>Loading: {"Loading"}</div>
     </>
-  ) 
-  if (loadingState) return <div>Loading: {"Loading"}</div>
+  )
+
   if (error) return (
     <>
       <Input {...input} onKeyPress={send} />
@@ -25,7 +25,15 @@ function App() {
       <div>Failed to load weather data. Look to console to learn more information</div>
     </>
   )
-  
+
+  if (!data) return (
+    <>
+      <Input {...input} onKeyPress={send} />
+      <Button onClick={send} />
+      <div>No weather data yet</div>
+    </>
+  )
+
   return (
     <>
       <Input {...input} onKeyPress={send} />

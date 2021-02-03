@@ -9,29 +9,36 @@ export function useHttp() {
     async function load(city) {
         setloadingState(true);
         setError(null);
-        const response = await fetch(getWeather(city));
-        setloadingState(false);
+        try {
+            const response = await fetch(getWeather(city));
+            setloadingState(false);
 
-        if(!response.ok) {
-            setError({status: response.status, message: response.statusText})
-            return;
-        }
+            if (!response.ok) {
+                setError({ status: response.status, message: response.statusText })
+                console.log(error)
+                return;
+            }
 
-        const serverData = await response.json();
-        const filteredData = {
-            city: serverData.city.name,
-            weather: getWeatherData(serverData.list)
+            const serverData = await response.json();
+            const filteredData = {
+                city: serverData.city.name,
+                weather: getWeatherData(serverData.list)
+            }
+            console.log(filteredData);
+            setData(filteredData);
+        } catch (e) {
+            setloadingState(false);
+            console.log(e);
+            setError(e);
         }
-        console.log(filteredData);
-        setData(filteredData);
     }
-    return {load, data, error, loadingState}
+    return { load, data, error, loadingState }
 }
 
 function getWeatherData(data) {
     const days = data.filter(date => new Date(date.dt * 1000).getHours() === 14)
     const weatherData = days.map((day) => ({
-        day: new Date(day.dt*1000).toDateString().split(" ")[0],
+        name: new Date(day.dt * 1000).toDateString().split(" ")[0],
         temperature: day.main.temp.toFixed(),
         icon: day.weather[0].icon,
         description: day.weather[0].description
