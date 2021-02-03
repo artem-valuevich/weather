@@ -18,10 +18,14 @@ input:focus {
     outline: 0;
 }
 
-
-.input:focus-within {
-    outline: 2px solid white;
+.input {
+    border-bottom: 1px solid  rgb(22, 141, 221);
+    width: fit-content;
 }
+
+/* .input:focus-within {
+    border-bottom: 1px solid yellow;
+} */
 
 .widget {
     color: #fff;

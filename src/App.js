@@ -12,8 +12,7 @@ function App() {
   if (loadingState) return (
     <>
       <Input {...input} disabled={loadingState} />
-      {/* <Button onClick={send} disabled={loadingState} /> */}
-      <div>Loading: {"Loading"}</div>
+      <div>Loading</div>
     </>
   )
 
@@ -36,18 +35,22 @@ function App() {
   return (
     <>
       <Input {...input} />
-      {/* <Button onClick={send} /> */}
       <div className="flex-container space-between">
+        
         <div className="column">
-          <div>{data.city.toUpperCase()}</div>
+          <div style={{fontSize: "1.5em"}}>{data.city.toUpperCase()}</div>
           <div>WEATHER</div>
         </div>
-        <img src={getIcon(data.weather.current.icon)} alt={data.weather.current.description}></img>
-        <div>
+
+        <img src={getIcon(data.weather.current.icon)} alt={data.weather.current.description}/>
+
+        <div className="column">
           <div style={{fontSize: "2em"}}>{data.weather.current.temperature}&deg;C</div>
           <div>{data.weather.current.description}</div>
         </div>
+
       </div>
+
       <WeatherList data={data} />
 
     </>
