@@ -1,5 +1,8 @@
 export default function Input(props) {
     return (
-        <input {...props} />
+        <div className="flex-container input">
+            <i className="material-icons">search</i>
+            <input {...props} placeholder="Введите город для поиска" />
+        </div>
     )
 }

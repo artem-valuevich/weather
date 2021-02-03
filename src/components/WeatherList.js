@@ -2,14 +2,13 @@ import { getIcon } from "../urls";
 
 export default function WeatherList({ data }) {
     return (
-        <div style={{display: "flex"}}>
+        <div className="flex-container space-between">
             
-            { data.weather.map((day, key) =>
-                <div key={key} style={{margin: 20}}>
+            { data.weather.forecast.map((day, key) =>
+                <div key={key} className="column">
                     <div>{day.name}</div>
-                    <div>Temperature: {day.temperature}&deg;C</div>
-                    <div>{day.description}</div>
                     <img src={getIcon(day.icon)} alt={day.description}></img>
+                    <div>{day.temperature}&deg;C</div>
                 </div>
                 )
             }
