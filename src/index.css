@@ -29,6 +29,7 @@ input:focus {
 
 .widget {
     color: #fff;
+    height: 275px;
     background-color: rgb(22, 141, 221);
 }
 
@@ -47,4 +48,14 @@ input:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+@media(max-width: 600px) {
+    .widget{
+        height: auto;
+    }
+
+    /* .flex-container {
+        flex-direction: column;
+    } */
 }
